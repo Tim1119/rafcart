@@ -30,16 +30,20 @@ DJANGO_APPS = [
 
 LOCAL_APPS = [
    'apps.account',
+   'apps.profiles',
 ]
 
 THIRD_PARTY_APPS = [
 #   'imagekit',
 #   'django_quill',
 #   'django_cleanup.apps.CleanupConfig',
-#   'mptt',
+#   'mptt', 
     'django_celery_beat',
     "debug_toolbar",
     'django_celery_results',
+    "phonenumber_field",
+    'imagekit',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Change Password
+{% endblock title %}
+{% block content %}
+
+<!-- breadcrumb -->
+<div class="container py-4 flex items-center gap-3">
+    <a href="../index.html" class="text-primary text-base">
+        <i class="fa-solid fa-house"></i>
+    </a>
+    <span class="text-sm text-gray-400">
+        <i class="fa-solid fa-chevron-right"></i>
+    </span>
+    <p class="text-gray-600 font-medium">Change Password</p>
+</div>
+<!-- ./breadcrumb -->
+
+<!-- wrapper -->
+<div class="container grid grid-cols-12 items-start gap-6 pt-4 pb-16">
+
+    <!-- sidebar -->
+    {% include 'profiles/partials/profile_sidebar.html' %}
+    <!-- ./sidebar -->
+
+    <!-- info -->
+    <div class="col-span-9 shadow rounded px-6 pt-5 pb-7">
+        <h4 class="text-lg font-medium capitalize mb-4">
+            Change Password
+        </h4>
+        <div class="space-y-4">
+           <form action="{% url 'account:change_password' %}" method="POST" autocomplete="off" class="django-login-form space-y-2" >
+            {% csrf_token %}
+            {% include 'partials/messages.html' %}
+               {{form.as_p}}
+               <div class="mt-4 flex items-center justify-center w-full">
+                   <button type="submit"
+                       class="py-3 px-4 text-center text-white bg-[#fd3d57] border border-primary rounded-md hover:bg-transparent hover:text-primary transition font-medium">Submit</button>
+               </div>
+           </form>
+        </div>
+
+    </div>
+    <!-- ./info -->
+
+</div>
+<!-- ./wrapper -->
+{% endblock content %}
+    
