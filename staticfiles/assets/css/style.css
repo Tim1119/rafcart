@@ -1,0 +1,21 @@
+.django-login-form label{
+    margin-bottom: 0.5rem;
+    color: #4b5563;
+    display: block;
+}
+
+.errorlist li{
+    color:red;
+}
+
+.success {
+    background-color: #d1e7dd;
+    border-color: #badbcc;
+    color: #0f5132;
+}
+
+.error {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}

@@ -8,7 +8,7 @@ from django.utils.log import DEFAULT_LOGGING
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 env = environ.Env(DEBUG=(bool, False))
 
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 environ.Env.read_env(BASE_DIR / ".env")
 
 
@@ -29,7 +29,7 @@ DJANGO_APPS = [
 ]
 
 LOCAL_APPS = [
-   
+   'apps.account',
 ]
 
 THIRD_PARTY_APPS = [
@@ -37,6 +37,9 @@ THIRD_PARTY_APPS = [
 #   'django_quill',
 #   'django_cleanup.apps.CleanupConfig',
 #   'mptt',
+    'django_celery_beat',
+    "debug_toolbar",
+    'django_celery_results',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
@@ -49,6 +52,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",# debug tool bar
+]
+
+INTERNAL_IPS = [
+    "127.0.0.1",
 ]
 
 ROOT_URLCONF = 'rafcart.urls'
@@ -115,8 +123,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
+STATICFILES_DIRS = os.path.join(BASE_DIR, 'staticfiles'),
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "mediafiles"
 
@@ -162,3 +170,28 @@ logging.config.dictConfig(
         },
     }
 )
+
+
+#SMTP SETTINGS
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER=env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD=env('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+DEFAULT_FROM_EMAIL='Rafcart E-commerce'
+
+AUTH_USER_MODEL = 'account.User'
+
+
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER='json'
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_TIMEZONE='Africa/Lagos'
+CELERY_RESULT_BACKEND='django-db'
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP=True
+CELERY_BEAT_SCHEDULER='django_celery_beat.schedulers:DatabaseScheduler'
+
+

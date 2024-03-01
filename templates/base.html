@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %} | Rafcart E-commerce Store</title>
+
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon/favicon.ico' %}" type="image/x-icon">
+
+    <link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/all.min.css' %}">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+   
+</head>
+
+<body>
+    <!-- header -->
+        {% include 'partials/header.html' %}
+        <!-- ./header -->
+        
+        <!-- navbar -->
+        {% include 'partials/navbar.html' %}
+  
+   
+    <!-- ./navbar -->
+
+    <!-- login -->
+    
+    {% block content %}
+        
+    {% endblock content %}
+        
+    <!-- ./login -->
+
+    <!-- footer -->
+        {% include 'partials/footer.html' %}
+    <!-- ./footer -->
+
+    <!-- copyright -->
+    {% include 'partials/copyright.html' %}
+    <!-- ./copyright -->
+
+    <script>
+
+// {% if debug %}
+//     if (typeof window.htmx !== "undefined") {
+//         htmx.on("htmx:afterSettle", function(detail) {
+//             if (
+//                 typeof window.djdt !== "undefined"
+//                 && detail.target instanceof HTMLBodyElement
+//             ) {
+//                 djdt.show_toolbar();
+//             }
+//         });
+//     }
+// {% endif %}
+    </script>
+
+
+
+<script src="{% static 'assets/js/all.min.js' %}"></script>
+
+</body>
+
+</html>
