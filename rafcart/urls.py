@@ -9,6 +9,7 @@ urlpatterns = [
     path("__debug__/", include("debug_toolbar.urls")),
     path('account/',include('apps.account.urls',namespace='account')),
     path('profiles/',include('apps.profiles.urls',namespace='profiles')),
+    path('product/',include('apps.product.urls',namespace='product')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
