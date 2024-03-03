@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Cart
+{% endblock title %}
+{% block content %}
+
+<!-- breadcrumb -->
+<div class="container py-4 flex items-center gap-3">
+    <a href="../index.html" class="text-primary text-base">
+        <i class="fa-solid fa-house"></i>
+    </a>
+    <span class="text-sm text-gray-400">
+        <i class="fa-solid fa-chevron-right"></i>
+    </span>
+    <p class="text-gray-600 font-medium">Cart</p>
+</div>
+<!-- ./breadcrumb -->
+
+<!-- wrapper -->
+<div class="container grid grid-cols-12 items-start pb-16 pt-4 gap-6">
+
+    <div class="col-span-8 p-4 rounded">
+        {% for item in cart %}
+       
+        {% include 'cart/partials/cart_item.html' %}
+    {% endfor %}
+    </div>
+
+    <div class="col-span-4 border border-gray-200 p-4 rounded">
+        <h4 class="text-gray-800 text-lg mb-4 font-medium uppercase">Summary</h4>
+      
+
+        <div class="flex justify-between border-b border-gray-200 mt-1 text-gray-800 font-medium py-3 uppercas">
+            <p>Total</p>
+            <p
+            hx-get="{% url 'cart:hx_cart_total' %}"
+            hx-trigger="update-menu-cart from:body"
+            hx-swap="innerHTML"
+            >
+            {% include 'cart/partials/cart_total.html' %}
+        </p>
+        </div>
+
+       
+
+        <a href="{% url 'cart:checkout' %}"
+            class="block w-full py-3 px-4 text-center text-white bg-primary border border-primary rounded-md hover:bg-transparent hover:text-primary transition font-medium">Checkout</a>
+    </div>
+
+</div>
+
+<!-- ./wrapper -->
+{% endblock content %}
+    

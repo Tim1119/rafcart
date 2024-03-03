@@ -11,10 +11,12 @@ from django.db.models import Q
 from django.db import models
 # Create your views here.
 class HomeView(LoginRequiredMixin,TemplateView):
-    template_name = 'product/product.html'
+    template_name = 'product/product_page.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        for key, value in self.request.session.items():
+            print(f"----->{key}: {value}")
         # get top 6 categories with highest number of product
         categories = Category.objects.annotate(num_products=Count('products')).order_by('-num_products')[:6] 
         top_new_arrivals = Product.objects.all().order_by('-created_on')[:4]
@@ -87,3 +89,5 @@ def search_shop(request):
     }
 
     return render(request, 'product/shop.html', context)
+
+

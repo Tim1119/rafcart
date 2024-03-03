@@ -10,6 +10,8 @@ urlpatterns = [
     path('account/',include('apps.account.urls',namespace='account')),
     path('profiles/',include('apps.profiles.urls',namespace='profiles')),
     path('product/',include('apps.product.urls',namespace='product')),
+    path('cart/',include('apps.cart.urls',namespace='cart')),
+    path('orders/',include('apps.order.urls',namespace='orders')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
